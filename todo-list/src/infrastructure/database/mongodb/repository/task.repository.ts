@@ -15,4 +15,19 @@ export class TaskRepository implements ITaskRepository {
         if (!data) return null;
         return new Task(data as any);
     }
+
+    async findAll(filter: Partial<Task>): Promise<Task[] | null>{
+        const data = await TaskModel.find(filter); 
+        return data;
+    }
+
+     async findByStatus(filter: Partial<Task>): Promise<Task[] | null>{
+        const data = await TaskModel.find(filter); 
+        return data;
+    }
+
+     async findByPriority(filter: Partial<Task>): Promise<Task[] | null>{
+        const data = await TaskModel.find(filter); 
+        return data;
+    }
 }
