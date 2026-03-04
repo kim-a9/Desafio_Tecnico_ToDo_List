@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import { CreateTaskUsecase } from "../../../application/usecases/create.task";
-import { Task, TaskProps } from "../../../domain/entities/task";
+import { CreateTaskUsecase } from "../../../application/usecases/create.task.usecase";
+import { TaskProps } from "../../../domain/entities/task";
 import { TaskRepository } from "../../database/mongodb/repository/task.repository";
-
 
 export class CreateTaskController{
     async handle(req: Request<{},{},TaskProps>, res: Response): Promise<Response> {
@@ -19,5 +18,5 @@ export class CreateTaskController{
         }
 
     }
-
 };
+

@@ -1,7 +1,9 @@
-import { Task } from "../../../../domain/entities/task";
+import { Task, TaskFilters } from "../../../../domain/entities/task";
 
 
 export interface ITaskRepository {
     create(task: Task): Promise<void>;
     findById(id: string): Promise<Task | null>;
+    findAll(filters?: TaskFilters): Promise<Task[]>;
+
 }
