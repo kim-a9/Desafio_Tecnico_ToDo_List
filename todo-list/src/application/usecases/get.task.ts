@@ -1,27 +1,26 @@
-import { Task, TaskProps } from "../../domain/entities/task";
+import { Task, TaskFilters } from "../../domain/entities/task";
+import { ITaskRepository } from "../../infrastructure/database/mongodb/repository/itask.repository";
 import { TaskRepository } from "../../infrastructure/database/mongodb/repository/task.repository";
 
 
 export class GetTaskByIdUsecase {
-    constructor(private taskRepository: TaskRepository) {}
+    constructor(private taskRepository: ITaskRepository) {}
 
-    async execute(id: string): Promise<Task | null> {
+    async execute(id: string) {
         const getTask = await this.taskRepository.findById(id);
-        return getTask;
+        if (!getTask) {
+            throw new Error("Não foi possível encontrar a Task.")
+        }
+        return getTask.toJSON();
     }
 }
 
-export class GetAllTasksUseCase {
-    constructor(private taskRepository: TaskRepository){}
-    
-}
+export class GetTasksUseCase {
+    constructor(private taskRepository: ITaskRepository) {}
 
-export class GetByStatusUseCase {
-    constructor(private taskRepository: TaskRepository){}
-    
-}
-
-export class GetByPriorityUseCase {
-    constructor(private taskRepository: TaskRepository){}
+    async execute(filters: TaskFilters) {
+        const getTask = await this.taskRepository.findAll(filters);
+        return getTask.map(task => task.toJSON());
+    }
     
 }

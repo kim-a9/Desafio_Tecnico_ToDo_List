@@ -4,14 +4,19 @@ export type TaskPriority = 'low'| 'medium' | 'high';
 
 
 export interface TaskProps {
-    id?: string;
+    id: string;
     title: string;
     description: string;
     status: TaskStatus;
     priority: TaskPriority;
     due_date: Date;
     created_at: Date;
-    updated_at: Date;
+    updated_at?: Date;
+}
+
+export interface TaskFilters{
+    status?: TaskStatus;
+    priority?: TaskPriority;
 }
 
 export class Task {
