@@ -6,7 +6,7 @@ export const taskSchema: Schema = new Schema({
     description: {type: String, required: true},
     status: {type: String, required: true},
     priority: {type: String, required: true},
-    due_date: {type: Date},
+    due_date: {type: Date, required: true},
     created_at: {type: Date},
     updated_at: {type: Date}
 });

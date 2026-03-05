@@ -7,7 +7,10 @@ export class CreateTaskUsecase {
 
     async execute(data: TaskProps) {
         const newTask = new Task(data);
-        const taskData = await this.taskRepository.create(newTask);
+
+        await this.taskRepository.create(newTask);
+
+        return newTask.toJSON();
     
     }
 }
