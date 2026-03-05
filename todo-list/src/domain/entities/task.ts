@@ -39,9 +39,16 @@ export class Task {
         if (props.description.length < 5) {
             throw new Error('O campo Description deve estar devidamente preenchido');
         }
-        if (props.due_date < new Date(new Date().setHours(0,0,0,0))){
-            throw new Error('A data de vencimento da task não pode ser anterior a atual.')
+        
+        const today = new Date();
+        today.setHours(0,0,0,0); 
+        const due_date = new Date(props.due_date);
+        due_date.setHours(0,0,0,0);
+
+        if (due_date < today){
+            throw new Error("A data de vencimento da task não pode ser anterior a atual.")
         }
+
     }
         get id() { return this.props.id; }
         get title() { return this.props.title; }
