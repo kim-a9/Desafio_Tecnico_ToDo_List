@@ -23,7 +23,6 @@ describe("Create Task Unit Test", () => {
         jest.clearAllMocks();
     });
 
-
     it("Deve criar nova task com sucesso", async () => {
         const createTask = new CreateTaskUsecase(mockRepo as any);
         const r = await createTask.execute(taskData);
@@ -32,12 +31,6 @@ describe("Create Task Unit Test", () => {
         expect(r).toHaveProperty("title", taskData.title);
 
     });
-
-
-
-
-
-
 
 
 })
