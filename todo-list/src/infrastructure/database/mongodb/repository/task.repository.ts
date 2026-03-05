@@ -54,7 +54,11 @@ export class TaskRepository implements ITaskRepository {
         }
        });
        
-       
     }
+
+    async delete(id: string): Promise<void> {
+        await TaskModel.findByIdAndDelete(id);
+    }
+
 
 }
