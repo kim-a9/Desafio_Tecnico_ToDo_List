@@ -40,4 +40,21 @@ export class TaskRepository implements ITaskRepository {
         }))
     }
 
+    async update(task: Task): Promise<void>{
+       const data = task.toJSON();
+
+       await TaskModel.findByIdAndUpdate(data.id, {
+        $set: {
+            title: data.title,
+            description: data.description,
+            status: data.status,
+            priority: data.priority,
+            due_date: data.due_date,
+            updated_at: data.updated_at,
+        }
+       });
+       
+       
+    }
+
 }
