@@ -5,5 +5,5 @@ export const validationSchema = z.object({
     description: z.string().min(3).max(50),
     status: z.enum(['pending', 'in_progress', 'completed', 'cancelled']),
     priority: z.enum(['low', 'medium', 'high']),
-    due_date: z.string().pipe(z.coerce.date()).optional()
+    due_date: z.string().pipe(z.coerce.date())
 })

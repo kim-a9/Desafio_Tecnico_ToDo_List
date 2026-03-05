@@ -4,13 +4,13 @@ export type TaskPriority = 'low'| 'medium' | 'high';
 
 
 export interface TaskProps {
-    id: string;
+    id?: string;
     title: string;
     description: string;
     status: TaskStatus;
     priority: TaskPriority;
     due_date: Date;
-    created_at: Date;
+    created_at?: Date;
     updated_at?: Date;
 }
 
@@ -26,7 +26,7 @@ export class Task {
         this.validate(props);
         this.props = {
             ...props,
-            id: props.id ?? new mongoose.Types.ObjectId().toString(),
+            id: props.id,
             created_at: props.created_at ?? new Date(),
             updated_at: props.updated_at ?? new Date(),
         };
@@ -39,9 +39,16 @@ export class Task {
         if (props.description.length < 5) {
             throw new Error('O campo Description deve estar devidamente preenchido');
         }
-        if (props.due_date < new Date(new Date().setHours(0,0,0,0))){
-            throw new Error('A data de vencimento da task não pode ser anterior a atual.')
+        
+        const today = new Date();
+        today.setHours(0,0,0,0); 
+        const due_date = new Date(props.due_date);
+        due_date.setHours(0,0,0,0);
+
+        if (due_date < today){
+            throw new Error("A data de vencimento da task não pode ser anterior a atual.")
         }
+
     }
         get id() { return this.props.id; }
         get title() { return this.props.title; }
@@ -50,12 +57,6 @@ export class Task {
 
     
 
-
-
-
-
-
-    
 }
 
 

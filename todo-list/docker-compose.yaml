@@ -1,0 +1,25 @@
+version: '3.8'
+
+services: 
+  mongodb: 
+    image: mongo:latest
+    container_name: itau-todo-db
+    ports: 
+      - "27017:27017"
+    volumes: 
+      - mongo-data:/data/db
+
+  app: 
+    build: .
+    container_name: itau-todo-app
+    ports: 
+      - "3000:3000"
+    environment: 
+      - MONGO_URL=mongodb://mongodb:27017/todo_list
+      - PORT=3000
+      - NODE_ENV=production
+    depends_on: 
+      - mongodb
+
+volumes: 
+  mongo-data: 
