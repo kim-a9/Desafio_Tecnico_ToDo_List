@@ -9,10 +9,10 @@ export const taskSchema: Schema = new Schema({
     due_date: {type: Date, required: true},
     created_at: {type: Date},
     updated_at: {type: Date}
-});
+}
+);
 
 export interface ITask extends Document {
-    id?: string;
     title: string;
     description: string;
     status: TaskStatus;

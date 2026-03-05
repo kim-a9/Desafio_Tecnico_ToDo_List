@@ -4,13 +4,13 @@ export type TaskPriority = 'low'| 'medium' | 'high';
 
 
 export interface TaskProps {
-    id: string;
+    id?: string;
     title: string;
     description: string;
     status: TaskStatus;
     priority: TaskPriority;
     due_date: Date;
-    created_at: Date;
+    created_at?: Date;
     updated_at?: Date;
 }
 
@@ -26,7 +26,7 @@ export class Task {
         this.validate(props);
         this.props = {
             ...props,
-            id: props.id ?? new mongoose.Types.ObjectId().toString(),
+            id: props.id,
             created_at: props.created_at ?? new Date(),
             updated_at: props.updated_at ?? new Date(),
         };
@@ -57,12 +57,6 @@ export class Task {
 
     
 
-
-
-
-
-
-    
 }
 
 
