@@ -7,7 +7,7 @@ Esta é uma API RESTful para gerenciamento de tarefas, desenvolvida como parte d
 - Runtime: Node.js v18+
 - Linguagem: TypeScript
 - Framework Web: Express
-- Banco de Dados: MongoDB (via Mongoose)
+- Banco de Dados: MongoDB Atlas (via Mongoose)
 - Validação: Zod
 - Logs: Pino (Estruturados em JSON)
 - Testes: Jest
