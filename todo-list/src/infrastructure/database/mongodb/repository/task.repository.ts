@@ -73,8 +73,8 @@ export class TaskRepository implements ITaskRepository {
 
     };
 
-    async delete(id: string): Promise<void> {
-        await TaskModel.findByIdAndDelete(id);
+    async delete(id: string): Promise<Task | null> {
+        return await TaskModel.findByIdAndDelete(id);
     }
 
 
