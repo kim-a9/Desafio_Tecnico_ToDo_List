@@ -26,5 +26,4 @@ mongoConnection().then(() => {
     )
 })
 
-
 export default app;
