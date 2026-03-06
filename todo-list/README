@@ -58,21 +58,107 @@ npm run dev
 ```markdown
 Método	    Endpoint	    Descrição
 - POST	    /tasks      	Cria uma nova tarefa.
-- GET	    /tasks      	Lista todas as tarefas (Suporta filtros ?status= e ?priority=).
+- GET	    /tasks      	Lista todas as tarefas **(Suporta filtros ?status= e ?priority=)**.
 - GET	    /tasks/:id	    Busca uma tarefa específica pelo ID.
 - PUT	    /tasks/:id	    Atualiza dados de uma tarefa (respeitando a regra de imutabilidade).
 - DELETE	/tasks/:id	    Remove uma tarefa.
 ```
 
-## Testes
+
+## Testando rotas 
+1. Mensagem inicial (GET http://localhost:3000/ )
+EXEMPLO DE RESPOSTA (Postman):
+![](img/POST-task-200.png)
+
+2. Adicionar TASK (POST http://localhost:3000/tasks )
+EXEMPLO DO BODY ENVIADO (Thunder Client):
+```console
+{
+    "title": "Task 6",
+    "description": "Testar API no Postman Endpoint POST",
+    "status": "in_progress",
+    "priority": "medium",
+    "due_date": "2026-05-20T15:30:00Z"
+}
+```
+EXEMPLO DE RESPOSTA (POSTMAN):
+![ROTA POST /tasks](img/POST-task-200.png)
+
+Regras de negócio: Não permitir data de vencimento anterior ao dia de hoje
+![ROTA POST /tasks](img/erro-POST-tasks-400.png)
+
+3. Pesquisar por todas as tasks ( GET http://localhost:3000/tasks )
+
+![ROTA GET /tasks](img)
+
+4. Pesquisar por UMA task ( GET http://localhost:3000/tasks/:id )
+EXEMPLO DE USO (Thunder Client): 
+```console
+GET http://localhost:3000/tasks/id
+```
+EXEMPLO DE RESPOSTA (POSTMAN):
+
+![ROTA GET /tasks/id](img/GETID-tasks-200.png)
+
+5. Pesquisar task POR FILTROS (status) ( GET http://localhost:3000/tasks?status=value )
+EXEMPLO DE USO (POSTMAN): 
+```console
+GET http://localhost:3000/tasks?status=value 
+```
+EXEMPLO DE RESPOSTA (POSTMAN):
+
+![ROTA GET /tasks?status=value](img/GET-tasks-status-200.png)
+
+6. Pesquisar task POR FILTROS (priority) ( GET http://localhost:3000/tasks?priority=value )
+EXEMPLO DE USO (POSTMAN): 
+```console
+GET http://localhost:3000/tasks?priority=value
+```
+EXEMPLO DE RESPOSTA (POSTMAN):
+
+![ROTA GET /tasks?priority=value](img/GET-tasks-priority-200.png)
+
+
+7. Editar informações de uma task ( PUT http://localhost:3000/tasks/id)
+EXEMPLO DO BODY ENVIADO (POSTMAN):
+```console
+{
+
+    "title": "Task",
+    "description": "Testar API no Postman  - Endpoint PUT",
+    "status": "in_progress",
+    "priority": "medium",
+    "due_date": "2026-05-20T15:30:00Z"
+
+}
+```
+EXEMPLO DE RESPOSTA (POSTMAN):
+
+![ROTA  put /tasks/id](img/PUT-task-200.png)
+
+Regras de negócio: Não permitir data de vencimento anterior ao dia de hoje
+![ROTA POST /tasks](img/erro-PUT-tasks-400.png)
+
+
+8. Excluir um produto dos registros ( DELETE http://localhost:3000/tasks/:productCode)
+EXEMPLO DE USO (POSTMAN): 
+```console
+GET http://localhost:3000/tasks/id
+```
+
+EXEMPLO DE RESPOSTA (POSTMAN):
+
+![ROTA DELETE /tasks/id](img/DELETE-task-204.png)
+
+
+
+## Testes unitário com Jest
 Foram implementados testes unitários focados nos Casos de Uso, garantindo que as regras de negócio funcionem independentemente do banco de dados.
 Para rodar os testes:
 
 ```console
 npm run test
 ```
-
-
 
 
 ## Observabilidade (Logs)
